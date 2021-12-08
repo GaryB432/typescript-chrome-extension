@@ -3,18 +3,25 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { InjectManifest } = require('workbox-webpack-plugin');
-
 const { merge } = require('webpack-merge');
+
+// const srcDir = path.join(process.cwd(), 'src');
 
 const base = {
   entry: {
-    'sensor-play': ['scripts/app.ts'],
+    popup: path.join('app', 'popup.ts'),
+    options: path.join('app', 'options.ts'),
+    background: path.join('app', 'background.ts'),
+    content: path.join('app', 'content.ts'),
+    // options: scriptDir('options.ts'),
+    // background: scriptDir('background.ts'),
+    // content: scriptDir('content.ts'),
+
   },
-  context: path.resolve(__dirname, 'src'),
+  context: path.join(process.cwd(), 'src'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'scripts/[name].[chunkhash:8].js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -32,20 +39,20 @@ const base = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html',
-      inject: 'body',
-      scriptLoading: 'defer',
+      template: path.join('app', 'options.html'),
+      filename: 'options.html',
+      chunks: ['options', 'vendor'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join('app', 'popup.html'),
+      filename: 'popup.html',
+      chunks: ['popup', 'vendor'],
     }),
     new CopyPlugin({
-      patterns: [{ from: 'public' }],
+      patterns: [{ from: 'assets' }],
       options: {
         concurrency: 100,
       },
-    }),
-    new InjectManifest({
-      swSrc: 'sw.js',
-      swDest: 'service-worker.js',
-      exclude: ['web.config'],
     }),
   ],
   resolve: {
