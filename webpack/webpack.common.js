@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const srcDir = path.join(process.cwd(), 'src');
 
 function scriptDir(script) {
-  return path.join(srcDir, 'scripts', script);
+  return path.join(srcDir, 'app', script);
 }
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
     content: scriptDir('content.ts'),
   },
   output: {
-    path: path.resolve(process.cwd(), 'dist/js'),
+    path: path.resolve(process.cwd(), 'dist'),
     filename: '[name].js',
   },
   optimization: {
@@ -37,14 +37,20 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
   },
   plugins: [
-    // new CopyPlugin({
-    //   patterns: [{ from: '.', to: '..', context: 'public' }],
-    //   options: { concurrency: 100 },
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: '../options.html',
-    //   chunks: ['options', 'vendor'],
-    // }),
+    new CopyPlugin({
+      patterns: [{ from: path.join(srcDir, 'assets') }],
+      options: { concurrency: 100 },
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'app', 'popup.html'),
+      filename: 'popup.html',
+      chunks: ['popup', 'vendor'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'app', 'options.html'),
+      filename: 'options.html',
+      chunks: ['options', 'vendor'],
+    }),
     // new HtmlWebpackPlugin({
     //   filename: '../popup.html',
     //   chunks: ['popup', 'vendor'],
