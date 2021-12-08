@@ -81,8 +81,8 @@ const prod = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[chunkhash:8].css',
-      chunkFilename: 'css/[id].[chunkhash:8].css',
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
     }),
   ],
 };
