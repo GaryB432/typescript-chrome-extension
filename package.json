@@ -9,12 +9,9 @@
     "lint": "tslint --format verbose --force src/**/*.ts"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.42",
-    "copy-webpack-plugin": "^4.0.1",
-    "ts-loader": "^2.0.1",
-    "tslint": "^4.5.1",
-    "tslint-loader": "^3.4.3",
-    "typescript": "^2.2.1",
-    "webpack": "^2.2.1"
+    "@types/chrome": "^0.0.168",
+    "copy-webpack-plugin": "^10.0.0",
+    "typescript": "^4.5.2",
+    "webpack": "^5.65.0"
   }
 }
