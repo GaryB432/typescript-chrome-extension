@@ -1,2 +1,2 @@
-import './options.scss'
-console.log("options");
+import './options.scss';
+console.log('options');

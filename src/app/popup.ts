@@ -1,3 +1,3 @@
-import "./popup.scss";
+import './popup.scss';
 
-console.log("popup");
+console.log('popup');

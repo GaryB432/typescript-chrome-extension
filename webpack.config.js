@@ -16,7 +16,6 @@ const base = {
     // options: scriptDir('options.ts'),
     // background: scriptDir('background.ts'),
     // content: scriptDir('content.ts'),
-
   },
   context: path.join(process.cwd(), 'src'),
   output: {

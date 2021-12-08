@@ -5,10 +5,7 @@
     {
       "label": "build",
       "type": "shell",
-      "args": [
-        "run",
-        "build"
-      ],
+      "args": ["run", "build"],
       "problemMatcher": [],
       "group": "build"
     }
