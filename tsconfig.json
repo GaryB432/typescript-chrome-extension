@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "module": "ES2020",
-    "lib": ["ES2017", "DOM"],
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
     "outDir": "public",
     "strict": true,
     "noEmitHelpers": false,
