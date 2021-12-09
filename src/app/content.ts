@@ -2,6 +2,8 @@ import { Message } from './types';
 
 // document.body.innerHTML = "";
 
+const uid = 'ssdnv3h';
+
 function addButton(name: string, cb: () => void) {
   const a = document.createElement('button');
   a.innerText = name;
@@ -49,94 +51,28 @@ document.body.appendChild(document.createElement('br'));
 document.body.appendChild(logDiv);
 
 function visitNode(callback: (a: Node) => void, node: Node) {
-  if (node.nodeType !== node.TEXT_NODE) callback(node);
+  callback(node);
   if (node.firstChild) visitNode(callback, node.firstChild);
   if (node.nextSibling) visitNode(callback, node.nextSibling);
 }
 
+const allElements: HTMLElement[] = [];
 visitNode((e) => {
-  console.log(e, e.nodeType, e.TEXT_NODE, '<<---');
-}, document);
+  if (e instanceof HTMLElement) {
+    allElements.push(e);
+  }
+}, document.body);
 
-// visitNode((node: Node) => {
-//   if (!node.hasChildNodes()) {
-//     log(
-//       (node instanceof HTMLElement ? 'yes' : node.textContent ?? 'wtf').concat(
-//         '<-'
-//       )
-//     );
-//     node.addEventListener('mouseenter', (e: Event) => {
-//       if (e && e.target) {
-//         if (e.target instanceof HTMLElement) {
-//           e.target.style.color = 'purple';
-//         }
-//         log(e.type);
-//       }
-//     });
-//     // if (node.textContent) {
-//     //   // log(node.textContent.concat('<<') ?? 'tbd');
-//     // } else {
-//     //   log('nope');
-//     // }
-//   }
-// }, document);
-
-// function v(cb: (e: Element) => void, e: Element): void {
-//   cb(e);
-//   // for (const c of e.children) {
-//   //   cb(c);
-//   //   // if (c.hasChildNodes()) {
-//   //   //   v(cb, c);
-//   //   // }
-//   // }
-// }
-
-// v((e) => {
-//   log(e.nodeName);
-// }, document.body);
-
-// for (let node of document.body.children) {
-//   log(node.nodeName); // shows all nodes from the collection
-// }
-
-// function visit(e: Element): void {
-//   if (!e.parentElement) {
-//     log(e.tagName);
-//   }
-//   if (e.hasChildNodes()) {
-//     const c = e.firstChild;
-//   }
-// }
-
-// visit(document.body);
-
-// function getLeafNodes(master: Element) {
-//   var nodes = Array.prototype.slice.call(master.getElementsByTagName('*'), 0);
-//   var leafNodes = nodes.filter(function (elem) {
-//     return !elem.hasChildNodes();
-//   });
-//   return leafNodes;
-// }
-
-// console.log(getLeafNodes(document.body));
-
-// const a = document.querySelectorAll<Element>('*');
-// for (const e of a) {
-//   if (e instanceof HTMLElement) {
-//     // if (!e.hasChildNodes()) {
-//     // log(e.tagName + '<-');
-//     // console.dir(e);
-//     e.addEventListener(
-//       'mouseenter',
-//       (vv) => {
-//         console.log(vv);
-//         e.style.border = '1px solid red';
-//         // vv.stopPropagation();
-//       },
-//       { capture: false }
-//     );
-//     // }
-//   }
-// }
+for (const ele of allElements.filter((e) => e.childElementCount === 0)) {
+  ele.addEventListener('mouseenter', (mev) => {
+    const target = mev.target as HTMLElement;
+    target.setAttribute(uid, target.style.border);
+    target.style.border = '1px solid blue';
+  });
+  ele.addEventListener('mouseleave', (mev) => {
+    const target = mev.target as HTMLElement;
+    target.style.border = target.getAttribute(uid) ?? '';
+  });
+}
 
 log('Ready.');
