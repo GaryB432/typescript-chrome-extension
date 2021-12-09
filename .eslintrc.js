@@ -2,18 +2,15 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['tsconfig.json'],
+    project: ['tsconfig.eslint.json'],
   },
   env: {
     browser: true,
+    es2021: true,
     jest: true,
   },
-  plugins: ['@typescript-eslint', 'jest'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  ],
+  plugins: ['gb', 'jest'],
+  extends: ['plugin:gb/recommended', 'plugin:prettier/recommended'],
   overrides: [
     {
       files: ['**/*.spec.ts'],
@@ -24,9 +21,7 @@ module.exports = {
     },
   ],
   rules: {
-    '@typescript-eslint/explicit-member-accessibility': 'warn',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/member-ordering': 'warn',
+    'prettier/prettier': 'warn',
     '@typescript-eslint/unbound-method': 'error',
   },
 };

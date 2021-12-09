@@ -1,12 +1,15 @@
 {
+  "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
-    "lib": ["dom", "es2015"]
-  }
+    "target": "ES2017",
+    "module": "ES2020",
+    "lib": ["ES2017", "DOM"],
+    "outDir": "public",
+    "strict": true,
+    "noEmitHelpers": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"],
+  "exclude": ["**/*.spec.ts"]
 }

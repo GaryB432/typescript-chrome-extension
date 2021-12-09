@@ -15,7 +15,7 @@ function sendMessage() {
 }
 
 sendMessage();
-chrome.browserAction.setBadgeText({ text: 'ON' });
+void chrome.browserAction.setBadgeText({ text: 'ON' });
 console.log('Loaded.');
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -39,7 +39,7 @@ chrome.browserAction.onClicked.addListener(() => {
 });
 
 chrome.commands.onCommand.addListener((_command) => {
-  chrome.tabs.create({ url: 'http://www.google.com/' });
+  void chrome.tabs.create({ url: 'http://www.google.com/' });
 });
 
 chrome.runtime.onMessage.addListener((msg: Message, _sender, sendResponse) => {
@@ -69,7 +69,7 @@ chrome.runtime.onSuspend.addListener(() => {
     // alert("Yet This does show up.");
   });
   console.log('Unloading.');
-  chrome.browserAction.setBadgeText({ text: '' });
+  void chrome.browserAction.setBadgeText({ text: '' });
   if (lastTabId) {
     chrome.tabs.sendMessage(lastTabId, 'Background page unloaded.');
   }
