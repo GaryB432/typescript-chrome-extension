@@ -5,17 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge');
 
-// const srcDir = path.join(process.cwd(), 'src');
-
 const base = {
   entry: {
     popup: path.join('app', 'popup.ts'),
     options: path.join('app', 'options.ts'),
     background: path.join('app', 'background.ts'),
     content: path.join('app', 'content.ts'),
-    // options: scriptDir('options.ts'),
-    // background: scriptDir('background.ts'),
-    // content: scriptDir('content.ts'),
   },
   context: path.join(process.cwd(), 'src'),
   output: {
